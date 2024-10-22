@@ -1,3 +1,2 @@
-PRG_NAME=xoxo
-$(PRG_NAME): $(PRG_NAME).c game.c 
-	clang $(PRG_NAME).c game.c `pkg-config --libs --cflags raylib` -o $(PRG_NAME)
+xoxo: xoxo.c game.c
+	clang xoxo.c game.c `pkg-config --libs --cflags raylib` -o xoxo

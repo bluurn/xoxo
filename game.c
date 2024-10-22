@@ -1,7 +1,5 @@
 #include "game.h"
-#include "raylib.h"
-#include <stdio.h>
-#include <stdlib.h>
+
 
 void ReadEvents() {
   if (IsKeyDown(KEY_F)) !IsWindowMaximized() ? MaximizeWindow() : RestoreWindow();
@@ -14,7 +12,46 @@ void RenderGame() {
 }
 
 
-Cell getCell(const Game *game, int x, int y) { return game->board[x + y * N]; }
+Cell getCell(const Game *game, int x, int y) 
+{ 
+  return game->board[x + y * N]; 
+}
+
+void setCell(Game *game, int x, int y, Cell cell)
+{
+  game->board[x + y * N] = cell;
+}
+
+void switchTurn(Game *game)
+{
+  if(game->state == PLAYER_X_TURN) {
+    game->state = PLAYER_O_TURN;
+  } else {
+    game->state = PLAYER_X_TURN;
+  }
+}
+
+void makeTurn(Game *game, int x, int y)
+{
+  switch (game->state) {
+    case PLAYER_X_TURN:
+      if(getCell(game, x, y) != E) return;
+      setCell(game, x, y, X);
+      switchTurn(game);
+
+      break;
+    case PLAYER_O_TURN:
+      if(getCell(game, x, y) != E) return;
+      setCell(game, x, y, O);
+      switchTurn(game);
+      break;
+    case PLAYER_X_WINS:
+    case PLAYER_O_WINS:
+    case TIE:
+    case EXIT:
+      break;
+  }
+}
 
 char cellToText(Cell it) {
   char c;
@@ -55,9 +92,9 @@ void printState(const Game *game)
   switch(game->state)
   {
     case PLAYER_X_TURN: printf("Player X's turn.\n"); break;
-    case PLAYER_Y_TURN: printf("Player O's turn.\n"); break;
+    case PLAYER_O_TURN: printf("Player O's turn.\n"); break;
     case PLAYER_X_WINS: printf("Player X wins.\n"); break;
-    case PLAYER_Y_WINS: printf("Player O wind.\n"); break;
+    case PLAYER_O_WINS: printf("Player O wind.\n"); break;
     case TIE: printf("Tie.\n"); break;
     case EXIT: printf("Exit.\n");break;
     default: 
