@@ -1,4 +1,5 @@
 #include "game.h"
+#include <assert.h>
 
 
 void ReadEvents() {
@@ -22,7 +23,18 @@ void setCell(Game *game, int x, int y, Cell cell)
   game->board[x + y * N] = cell;
 }
 
-void switchTurn(Game *game)
+bool isPlayerWon(const Game *game, Cell player) {
+  assert(player != E);
+  //TODO not implemented
+
+  // check if any column is filled with same cell value
+  // check if any row is filled with same cell value
+  // check if any diagonal is filled with same cell value
+
+  return false;
+}
+
+void updateState(Game *game)
 {
   if(game->state == PLAYER_X_TURN) {
     game->state = PLAYER_O_TURN;
@@ -37,13 +49,13 @@ void makeTurn(Game *game, int x, int y)
     case PLAYER_X_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, X);
-      switchTurn(game);
+      updateState(game);
 
       break;
     case PLAYER_O_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, O);
-      switchTurn(game);
+      updateState(game);
       break;
     case PLAYER_X_WINS:
     case PLAYER_O_WINS:

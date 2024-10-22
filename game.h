@@ -18,9 +18,9 @@ typedef enum {
 } GameState ;
 
 typedef enum {
+  E,
   X,
   O,
-  E,
 } Cell;
 
 
