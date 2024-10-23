@@ -1,4 +1,6 @@
 #include "game.h"
+#include <string.h>
+
 
 
 Cell getCell(const Game *game, int x, int y) 
@@ -67,25 +69,31 @@ void switchPlayer(Game *game)
   }
 }
 
+void resetGame(Game *game)
+{
+  memset(game->board, E, N*sizeof(Cell));
+  game->state = PLAYER_X_TURN;
+}
+
 void makeTurn(Game *game, int x, int y)
 {
   switch (game->state) {
     case PLAYER_X_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, X);
-      switchPlayer(game);
       checkGameOver(game);
+      switchPlayer(game);
       break;
     case PLAYER_O_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, O);
-      switchPlayer(game);
       checkGameOver(game);
+      switchPlayer(game);
       break;
     case PLAYER_X_WINS:
     case PLAYER_O_WINS:
     case TIE:
-    case EXIT:
+      resetGame(game);
       break;
   }
 }
@@ -133,7 +141,6 @@ void printState(const Game *game)
     case PLAYER_X_WINS: printf("Player X wins.\n"); break;
     case PLAYER_O_WINS: printf("Player O wind.\n"); break;
     case TIE: printf("Tie.\n"); break;
-    case EXIT: printf("Exit.\n");break;
     default: 
                fprintf(stderr, "Unexpected cell value %d", game->state);
                exit(EXIT_FAILURE);

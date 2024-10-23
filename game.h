@@ -12,8 +12,7 @@ typedef enum {
   PLAYER_O_TURN,
   PLAYER_X_WINS,
   PLAYER_O_WINS,
-  TIE,
-  EXIT
+  TIE
 } GameState ;
 
 typedef enum {
