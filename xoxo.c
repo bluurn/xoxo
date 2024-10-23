@@ -7,7 +7,7 @@
 
 #define WINDOW_TITLE "Tic Tac Toe"
 #define INIT_SCREEN_WIDTH 1024
-#define INIT_SCREEN_HEIGHT 768
+#define INIT_SCREEN_HEIGHT 1024
 
 void ReadEvents() 
 {
@@ -18,8 +18,6 @@ void ReadEvents()
 void RenderX(int x, int y) {
   float w = (float)GetScreenWidth() / N;
   float h = (float)GetScreenHeight() / N;
-
-  // TODO make lines orthogonal
 
   Vector2 tl = { w / 3, h / 3 };
   Vector2 br = { w - w / 3, h - h / 3 };
@@ -79,7 +77,7 @@ int main(void)
     .state = PLAYER_X_TURN
   };
 
-  SetConfigFlags(FLAG_WINDOW_RESIZABLE | FLAG_WINDOW_TOPMOST | FLAG_WINDOW_ALWAYS_RUN);
+  SetConfigFlags(FLAG_WINDOW_TOPMOST | FLAG_WINDOW_ALWAYS_RUN);
   SetTargetFPS(60);
   InitWindow(INIT_SCREEN_WIDTH, INIT_SCREEN_HEIGHT, WINDOW_TITLE);
 
