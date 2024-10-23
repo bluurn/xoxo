@@ -1,12 +1,11 @@
 #ifndef GAME_H_
 #define GAME_H_
-#include "raylib.h"
+#define N 3
+
 #include <stdio.h>
 #include <stdlib.h>
-#define WINDOW_TITLE "Tic Tac Toe"
-#define INIT_SCREEN_WIDTH 1024
-#define INIT_SCREEN_HEIGHT 768
-#define N 3
+#include <assert.h>
+#include <stdbool.h>
 
 typedef enum {
   PLAYER_X_TURN,

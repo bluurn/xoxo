@@ -1,16 +1,4 @@
 #include "game.h"
-#include <assert.h>
-
-
-void ReadEvents() {
-  if (IsKeyDown(KEY_F)) !IsWindowMaximized() ? MaximizeWindow() : RestoreWindow();
-}
-
-void RenderGame() {
-  BeginDrawing();
-  ClearBackground(DARKGRAY);
-  EndDrawing();
-}
 
 
 Cell getCell(const Game *game, int x, int y) 

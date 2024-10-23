@@ -1,2 +1,2 @@
-xoxo: xoxo.c game.c
-	clang xoxo.c game.c `pkg-config --libs --cflags raylib` -o xoxo
+xoxo: xoxo.c game.c render.c
+	clang xoxo.c game.c render.c `pkg-config --libs --cflags raylib` -o xoxo
