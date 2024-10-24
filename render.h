@@ -3,6 +3,5 @@
 #include "raylib.h"
 #include "game.h"
 
-void RenderGrid(void);
 void RenderGame(const Game * game);
 #endif

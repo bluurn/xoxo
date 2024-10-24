@@ -21,27 +21,15 @@ void ReadEvents(Game * game)
 
 int main(void)
 {
-  Game game = {
-    .board = { 
-      E, E, E,
-      E, E, E,
-      E, E, E,
-    },
-    .state = PLAYER_X_TURN
-  };
+  Game game = {0};
 
   SetConfigFlags(FLAG_WINDOW_TOPMOST | FLAG_WINDOW_ALWAYS_RUN);
   SetTargetFPS(60);
   InitWindow(INIT_SCREEN_WIDTH, INIT_SCREEN_HEIGHT, WINDOW_TITLE);
 
   while(!WindowShouldClose()) {
-    ReadEvents(&game);
-    BeginDrawing();
-    ClearBackground(DARKGRAY);
-    RenderGrid();
     RenderGame(&game);
-    EndDrawing();
-    debugGame(&game);
+    ReadEvents(&game);
   }
 
   CloseWindow();

@@ -1,6 +1,7 @@
 #ifndef GAME_H_
 #define GAME_H_
 #define N 3
+#define BASE_FONT_SIZE 60
 
 #include <stdio.h>
 #include <stdlib.h>

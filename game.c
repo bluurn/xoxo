@@ -1,7 +1,4 @@
 #include "game.h"
-#include <string.h>
-
-
 
 Cell getCell(const Game *game, int x, int y) 
 { 
@@ -71,7 +68,7 @@ void switchPlayer(Game *game)
 
 void resetGame(Game *game)
 {
-  memset(game->board, E, N*sizeof(Cell));
+  for(int i = 0; i < N*N; ++i) game->board[i] = E;
   game->state = PLAYER_X_TURN;
 }
 
@@ -81,14 +78,14 @@ void makeTurn(Game *game, int x, int y)
     case PLAYER_X_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, X);
-      checkGameOver(game);
       switchPlayer(game);
+      checkGameOver(game);
       break;
     case PLAYER_O_TURN:
       if(getCell(game, x, y) != E) return;
       setCell(game, x, y, O);
-      checkGameOver(game);
       switchPlayer(game);
+      checkGameOver(game);
       break;
     case PLAYER_X_WINS:
     case PLAYER_O_WINS:
