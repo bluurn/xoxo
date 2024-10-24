@@ -23,27 +23,24 @@ bool isTie(const Game *game)
 bool isPlayerWon(const Game *game, Cell player) {
   assert(player != E);
 
-  int rowCount = 0;
-  int colCount = 0;
-  int diag1Count = 0;
-  int diag2Count = 0;
-
   for(int i = 0; i < N; ++i) {
+    bool rowWin = true, colWin = true;
     for(int j = 0; j < N; ++j) {
-      if(game->board[i * N + j]== player) rowCount++;
-      if(game->board[j * N + i] == player) colCount++;
+      if(getCell(game, i, j) != player) rowWin = false;
+      if(getCell(game, j, i) != player) colWin = false;
     }
-
-    if(rowCount >= N || colCount >= N) return true;
-
-    rowCount = 0;
-    colCount = 0;
-
-    if(game->board[i * N + 1] == player) diag1Count++;
-    if(game->board[i * N + N - i - 1]) diag2Count++;
+    if(rowWin || colWin) return true; 
   }
 
-  return diag1Count >= N || diag2Count >= N;
+  bool mainDiagonalWin = true, antiDiagonalWin = true;
+  for(int i = 0; i < N; ++i) {
+    if(getCell(game, i, i) != player) mainDiagonalWin = 0;
+    if(getCell(game, i, N - i - 1) != player) antiDiagonalWin = 0;
+  }
+
+  if(mainDiagonalWin || antiDiagonalWin) return true;
+
+  return false;
 }
 
 void checkGameOver(Game *game)
@@ -94,59 +91,3 @@ void makeTurn(Game *game, int x, int y)
       break;
   }
 }
-
-char cellToText(Cell it) {
-  char c;
-  switch (it) {
-    case X:
-      c = 'X';
-      break;
-    case O:
-      c = 'O';
-      break;
-    case E:
-      c = ' ';
-      break;
-    default:
-      fprintf(stderr, "Unexpected cell value %d", it);
-      exit(EXIT_FAILURE);
-  }
-
-  return c;
-}
-
-
-void printBoard(const Game *game) {
-  printf("Board:\n");
-  for(int i = 0; i < N; ++i) {
-    for(int j = 0; j < N; ++j) {
-      Cell cell = getCell(game, j, i);
-      if(j > 0) printf(" "); 
-      printf("%c", cellToText(cell));
-    }
-    printf("\n");
-  }
-}
-
-void printState(const Game *game)
-{
-  printf("State: ");
-  switch(game->state)
-  {
-    case PLAYER_X_TURN: printf("Player X's turn.\n"); break;
-    case PLAYER_O_TURN: printf("Player O's turn.\n"); break;
-    case PLAYER_X_WINS: printf("Player X wins.\n"); break;
-    case PLAYER_O_WINS: printf("Player O wind.\n"); break;
-    case TIE: printf("Tie.\n"); break;
-    default: 
-               fprintf(stderr, "Unexpected cell value %d", game->state);
-               exit(EXIT_FAILURE);
-  }
-}
-
-void debugGame(const Game *game)
-{
-  printBoard(game);
-  printState(game);
-}
-

@@ -35,8 +35,4 @@ Cell getCell(const Game *game, int x, int y);
 // Make turn
 void makeTurn(Game *game, int x, int y);
 
-// Print game state
-void debugGame(const Game *game);
-
-
 #endif // GAME_H
