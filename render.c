@@ -123,7 +123,7 @@ void RenderGame(const Game * game)
   RenderGrid(game);
   for(int y = 0; y < N; ++y) {
     for(int x = 0; x < N; ++x) {
-      Cell value = getCell(game, x, y);
+      Cell value = Game_getCell(game, x, y);
       RenderCellValue(value, x, y);
     }
   }

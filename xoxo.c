@@ -15,7 +15,7 @@ void ReadEvents(Game * game)
   if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
     int cellWidth = GetScreenWidth() / N;
     int cellHeight = GetScreenHeight() / N;
-    makeTurn(game, GetMouseX() / cellWidth, GetMouseY() / cellHeight);
+    Game_makeTurn(game, GetMouseX() / cellWidth, GetMouseY() / cellHeight);
   }
 }
 

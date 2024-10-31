@@ -30,9 +30,9 @@ typedef struct {
 
 
 // Get cell by coordinates
-Cell getCell(const Game *game, int x, int y);
+Cell Game_getCell(const Game *game, int x, int y);
 
 // Make turn
-void makeTurn(Game *game, int x, int y);
+void Game_makeTurn(Game *game, int x, int y);
 
 #endif // GAME_H
