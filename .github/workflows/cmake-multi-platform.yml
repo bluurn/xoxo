@@ -47,8 +47,12 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
-    - name: Install XRandr
-      run: sudo apt install -y libxrandr-dev libxinerama-dev
+    - name: Install Deps
+      run: >
+        sudo apt install -y libasound2-dev libx11-dev libxrandr-dev libxi-dev 
+        libgl1-mesa-dev libglu1-mesa-dev libxcursor-dev libxinerama-dev 
+        libwayland-dev libxkbcommon-dev
+
       if: matrix.os == 'ubuntu-latest'
 
     - name: Set reusable strings
