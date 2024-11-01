@@ -78,13 +78,22 @@ jobs:
    
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
-      if: matrix.os == 'ubuntu-latest'
-      with: 
-        path: ${{ steps.strings.outputs.build-output-dir }}/xoxo
+      if: matrix.os == 'ubuntu-latest' && matrix.c_compiler == 'gcc'
+      with:
+        name: bundle-ubuntu-gcc
+        path: ${{ steps.strings.outputs.build-output-dir }}/*
+
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v4.4.3
+      if: matrix.os == 'ubuntu-latest' && matrix.c_compiler == 'clang'
+      with:
+        name: bundle-ubuntu-clang
+        path: ${{ steps.strings.outputs.build-output-dir }}/*
       
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v4.4.3
       if: matrix.os == 'windows-latest'
-      with: 
-        path: ${{ steps.strings.outputs.build-output-dir }}/xoxo.exe
+      with:
+        name: bundle-windows
+        path: ${{ steps.strings.outputs.build-output-dir }}/*
       
