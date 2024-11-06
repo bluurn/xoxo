@@ -96,26 +96,3 @@ jobs:
       with:
         name: bundle-windows
         path: ${{ steps.strings.outputs.build-output-dir }}/*
-  release:
-    runs-on: ubuntu-latest
-    needs: build
-    if: github.event_name == 'release' && github.event.action == 'published'
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Package Release
-        run: |
-          mkdir -p release
-          cp build/${{ github.event.repository.name }} release/  # Adjust if necessary
-          # Optionally package other files like assets if needed
-          zip -r release/pong_release.zip release/*  # Zip the release folder
-
-      - name: Upload Release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./release/pong_release.zip  # Path to the zip file created
-          asset_name: pong_release.zip  # Name of the asset
-          asset_content_type: application/zip  # Adjust if necessary      
